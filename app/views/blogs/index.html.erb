@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Blogs</h1>
+
+<%= page_entries_info @blogs %>
+<div id="pag_buttons">
+  <%= paginate @blogs, window: 3 %>
+</div>
+
+<table id="styled_table">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Publish date</th>
+    <th>Author</th>
+    <th>Content</th>
+    <% if current_user.try(:admin?) %>
+        <th colspan="3">Show/Edit/Destroy</th>
+    <% else %>
+        <th colspan="3">Show</th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @blogs.each do |blog| %>
+      <tr>
+        <td><%= blog.title %></td>
+        <td><%= blog.publish_date.strftime("%b %-d, %Y") %></td>
+        <td><%= blog.author %></td>
+        <td><%= truncate(blog.content.html_safe, escape: false) %></td>
+        <td><%= link_to 'Show', blog %></td>
+        <% if current_user.try(:admin?) %>
+            <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+            <td><%= link_to 'Destroy', blog, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path%>

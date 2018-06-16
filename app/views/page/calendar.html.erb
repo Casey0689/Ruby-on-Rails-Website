@@ -1,0 +1,9 @@
+<h1 class="title">Calendar</h1>
+
+<div class="wrapper">
+
+  <h3 id="cal_title">Today is: <%= Time.now().strftime('%A %B %-d')%></h3>
+
+<%= calendar( @month, @year) %>
+
+</div>

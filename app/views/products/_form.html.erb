@@ -1,0 +1,63 @@
+<%= tinymce %>
+<%= form_for(product) do |f| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, id: :product_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, id: :product_description , class: "tinymce"%>
+  </div>
+
+  <div class="field">
+    <%= f.label :quantity_on_hand %>
+    <%= f.number_field :quantity_on_hand, id: :product_quantity_on_hand %>
+  </div>
+
+  <div class="field">
+    <%= f.label :low_price_range %>
+    <%= f.text_field :low_price_range, id: :product_low_price_range %>
+  </div>
+
+  <div class="field">
+    <%= f.label :high_price_range %>
+    <%= f.text_field :high_price_range, id: :product_high_price_range %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cost_to_company %>
+    <%= f.text_field :cost_to_company, id: :product_cost_to_company %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shipping_weight %>
+    <%= f.text_field :shipping_weight, id: :product_shipping_weight %>
+  </div>
+
+  <div class="field">
+    <%= f.label :thumb_image %>
+    <%= f.text_field :thumb_image, id: :product_thumb_image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :full_image %>
+    <%= f.text_field :full_image, id: :product_full_image %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

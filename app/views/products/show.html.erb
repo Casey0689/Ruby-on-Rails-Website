@@ -1,0 +1,103 @@
+<p id="notice"><%= notice %></p>
+<%= tinymce %>
+<% if current_user.try(:admin?) %>
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
+<%= link_to 'Back', products_path %>
+
+<br>
+<% average = @product.reviews.all.average(:rating) %>
+<% if !average.nil? %>
+    <h5>Average Product Rating: <%= (image_tag('thumbs_up.png', size: '20x20') * average).html_safe %></h5>
+<% end %>
+<br>
+
+<p>
+  <strong>Beer Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Beer Type:</strong>
+  <%= @product.description.html_safe %>
+</p>
+<% if current_user.try(:admin?) %>
+    <p>
+      <strong>Quantity on hand:</strong>
+      <%= @product.quantity_on_hand %>
+    </p>
+
+    <p>
+      <strong>Low price range:</strong>
+      <%= number_to_currency @product.low_price_range %>
+    </p>
+
+    <p>
+      <strong>High price range:</strong>
+      <%= number_to_currency @product.high_price_range %>
+    </p>
+
+    <p>
+      <strong>Cost to company:</strong>
+      <%= number_to_currency @product.cost_to_company %>
+    </p>
+
+    <p>
+      <strong>Shipping weight:</strong>
+      <%= "#{@product.shipping_weight} lbs" %>
+    </p>
+<% end %>
+<p>
+  <strong>Thumb image:</strong>
+  <%= image_tag @product.thumb_image %>
+</p>
+
+<p>
+  <strong>Full image:</strong>
+  <%= image_tag @product.full_image %>
+</p>
+
+#All Reviews
+<hr>
+<% @product.reviews.each do |review| %>
+    <div>
+      <p><%= time_ago_in_words(review.created_at) %> ago, <%= review.name %> Wrote:<br>
+        <%= review.review_text.html_safe %><br>
+        Rating: <%= (image_tag('thumbs_up.png', size: '20x20') * review.rating).html_safe %>
+      </p>
+      <% if current_user.try(:admin?) %>
+          <p><%= link_to "Remove", product_review_path(@product, review), method: :delete, data: {confirm: 'Are you Sure?'} %></p>
+      <% end %>
+      <hr>
+    </div>
+<% end %>
+
+<% if current_user.try(:admin?) %>
+    #Enter a New Review
+    <%= form_for([@product, @product.reviews.build]) do |f| %>
+
+        <%= f.hidden_field :product_id %>
+
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+
+        <div class="field">
+          <%= f.label :review_text %><br>
+          <%= f.text_area :review_text, class: "tinymce" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :rating %><br>
+          <%= f.number_field :rating %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+    <% end %>
+
+    <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
+<%= link_to 'Back', products_path %>

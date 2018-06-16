@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <!--  App Title  -->
+  <title>Casey's Store</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+
+  <!--  App Description  -->
+  <meta name="description" content="Capture is a free bootstrap v3.3.2 app landing page perfect to present you IOS, android or windows application in an elegant way."/>
+  <meta charset="utf-8">
+  <meta name="author" content="pixelhint.com">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0"/>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="logo pull-left animated wow fadeInLeft">
+      <%= image_tag 'logo.png', :class => "logo_image" %>
+    </div>
+
+    <%= render 'shared/nav' %>
+
+  </div>
+</header>
+
+<div class="wrapper">
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+<%= yield %>
+</div>
+
+<footer>
+  <ul class="list-unstyled list-inline app_platform">
+    <li class="animated wow fadeInDown" data-wow-delay="0s">
+      <%= image_tag 'android_icon.png' %><a href="">Android</a>
+    </li>
+    <li class="animated wow fadeInDown" data-wow-delay=".1s">
+      <%= image_tag 'ios_icon.png' %><a href="">IOS</a>
+    </li>
+    <li class="animated wow fadeInDown" data-wow-delay=".2s">
+      <%= image_tag 'windows_icon.png' %><a href="">Windows</a>
+    </li>
+  </ul>
+  <p class="copyright animated wow fadeIn" data-wow-duration="2s">© 2015
+    <a href="http://pixelhint.com" target="_blank"><strong>Pixelhint.com</strong></a>. All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

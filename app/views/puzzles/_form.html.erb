@@ -1,0 +1,16 @@
+<%= form_tag('/puzzles/create', method: :post) do %>
+
+  <div class="field">
+    <%= label_tag :puzzle_name %>
+    <%= text_field_tag :puzzle_name %>
+  </div>
+
+  <div class="field">
+    <%= label_tag :word_list %>
+    <%= text_area_tag :word_list %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Create Puzzle" %>
+  </div>
+<% end %>

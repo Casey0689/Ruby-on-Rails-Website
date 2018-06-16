@@ -1,0 +1,67 @@
+<h1>Contact Us</h1>
+<div class="wrapper">
+  <div class="alert" style="color: red;">
+    <% if alert != "" %>
+        <%= alert.html_safe %>
+    <% end %>
+  </div>
+
+  <%= form_tag '/contact_us', method: :get do %>
+
+      <%= label_tag 'first_name', "Enter Your First Name" %>
+      <%= text_field_tag 'first_name', @first_name %><br/>
+
+      <%= label_tag 'last_name', "Enter Your Last Name" %>
+      <%= text_field_tag 'last_name', @last_name %><br/>
+
+      <%= label_tag 'email', "Enter Your Email" %>
+      <%= email_field_tag 'email', @email %><br/>
+
+      <%= label_tag 'phone_number', "Enter Your Phone Number" %>
+      <%= phone_field_tag 'phone_number', @phone_number %><br/>
+
+      <%= label_tag 'question', "Enter Your Question" %><br/>
+      <%= text_area_tag 'question', @question %><br/>
+
+      <%= label_tag 'newsletter', "Subscribe to Newsletter" %>
+      <%= check_box_tag 'newsletter', 'subscribed', @subscribed %><br/>
+
+      <%= label_tag 'contact_phone', "Contact by Phone" %>
+      <%= radio_button_tag 'contact', 'phone', @contact == "phone" %><br/>
+
+      <%= label_tag 'contact_e-mail', "Contact by Email" %>
+      <%= radio_button_tag 'contact', 'e-mail', @contact == "e-mail" %><br/>
+
+      <%= select_tag 'products', options_for_select(@products, @selected_product) %><br/>
+
+      <%= submit_tag nil, class: 'submit' %><br/>
+  <% end %>
+  <% if @commit != nil %>
+      <div style="color: blue;">
+        <% if (@commit != nil) && (@first_name != "") %>
+            <%= "First Name: #{@first_name}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@last_name != "") %>
+            <%= "Last Name: #{@last_name}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@email != "") %>
+            <%= "Email: #{@email}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@phone_number != "") %>
+            <%= "Phone Number: #{@phone_number}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@question != "") %>
+            <%= "Question: #{@question}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@subscribed == true) %>
+            <%= "Subscribed: #{@subscribed}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@contact == "phone") || (@contact == "e-mail") %>
+            <%= "Contact by: #{@contact}" %><br/>
+        <% end %>
+        <% if (@commit != nil) && (@selected_product != "") %>
+            <%= "Product Chosen: #{@selected_product}" %><br/>
+        <% end %>
+      </div>
+  <% end %>
+</div>

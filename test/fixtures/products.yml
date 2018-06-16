@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  quantity_on_hand: 1
+  low_price_range: 9.99
+  high_price_range: 9.99
+  cost_to_company: 9.99
+  shipping_weight: 9.99
+  thumb_image: MyString
+  full_image: MyString
+
+two:
+  name: MyString
+  description: MyText
+  quantity_on_hand: 1
+  low_price_range: 9.99
+  high_price_range: 9.99
+  cost_to_company: 9.99
+  shipping_weight: 9.99
+  thumb_image: MyString
+  full_image: MyString

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>New:</strong>
+  <%= @puzzle.new %>
+</p>
+
+<p>
+  <strong>Show:</strong>
+  <%= @puzzle.show %>
+</p>
+
+<%= link_to 'Edit', edit_puzzle_path(@puzzle) %> |
+<%= link_to 'Back', puzzles_path %>

@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<h1 class="title">Products</h1>
+
+<%= page_entries_info @products %>
+<div id="pag_buttons">
+  <%= paginate @products, window: 3 %>
+</div>
+
+<table id="styled_table">
+  <thead>
+  <tr>
+    <% if current_user.try(:admin?) %>
+        <th>ID</th>
+    <% end %>
+    <th>Beer Name</th>
+    <th>Beer Type</th>
+    <% if current_user.try(:admin?) %>
+        <th>Quantity on hand</th>
+        <th>Low price range</th>
+        <th>High price range</th>
+        <th>Cost to company</th>
+        <th>Shipping weight</th>
+    <% end %>
+    <th>Thumb image</th>
+    <th>Full image</th>
+    <% if current_user.try(:admin?) %>
+        <th colspan="4">Show/Edit/Destroy/Email</th>
+    <% else %>
+        <th colspan="3">Show</th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @products.each do |product| %>
+      <tr>
+        <% if current_user.try(:admin?) %>
+            <td><%= product.id %></td>
+        <% end %>
+        <td><%= truncate product.name %></td>
+        <td><%= truncate(product.description.html_safe, escape: false) %></td>
+        <% if current_user.try(:admin?) %>
+            <td><%= product.quantity_on_hand %></td>
+            <td><%= number_to_currency product.low_price_range %></td>
+            <td><%= number_to_currency product.high_price_range %></td>
+            <td><%= number_to_currency product.cost_to_company %></td>
+            <td><%= "#{product.shipping_weight} lbs" %></td>
+        <% end %>
+        <td><%= truncate product.thumb_image %></td>
+        <td><%= truncate product.full_image %></td>
+        <td><%= link_to 'Show', product %></td>
+        <% if current_user.try(:admin?) %>
+            <td><%= link_to 'Edit', edit_product_path(product) %></td>
+            <td><%= link_to 'Destroy', product, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <td><%= link_to 'Email', email_product_path(product) %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<br>
+<div id="pag_buttons">
+  <%= paginate @products, window: 3 %>
+</div>
+
+<% if current_user.try(:admin?) %>
+    <%= link_to 'New Product', new_product_path %>
+<% end %>
